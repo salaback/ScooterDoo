@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Station extends Model
@@ -15,5 +16,30 @@ class Station extends Model
     public function carts()
     {
         return $this->hasMany(StationCart::class);
+    }
+
+    public function getAvailableScootersAttribute($eta = null)
+    {
+        // add now as eta, if no offered
+        if($eta == null)
+        {
+            $eta = Carbon::now();
+        }
+
+        // search for carts which will be available
+        $carts =  $this->carts('eta', '>', $eta)->get();
+
+        // initialize scooters
+        $scooters = [];
+
+        // grab all avalible scooter ids
+        foreach($carts as $cart) {
+            $ids = $cart->slots->where('status', 'available')->pluck('scooter_id');
+
+            $scooters = array_merge($scooters, $ids->toArray());
+        }
+
+        // return scooters as objects
+        return Scooter::findMany($scooters);
     }
 }
