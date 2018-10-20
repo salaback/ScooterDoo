@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class StationSlot extends Model
 {
-    protected $fillable = ['name', 'station_id', 'scooter_id', 'status'];
+    protected $fillable = ['name', 'station_cart_id', 'scooter_id', 'status'];
 
     /**
      * the parent cart of the slot

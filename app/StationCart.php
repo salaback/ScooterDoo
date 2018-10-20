@@ -16,4 +16,9 @@ class StationCart extends Model
     {
         return $this->hasMany(StationSlot::class);
     }
+
+    public function station()
+    {
+        return $this->belongsTo(Station::class);
+    }
 }

@@ -17,6 +17,7 @@ class CreateStationCartsTable extends Migration
             $table->increments('id');
             $table->integer('station_id')->unsigned();
             $table->dateTime('eta')->nullable();
+            $table->string('name');
             $table->string('status')->default('created');
             $table->timestamps();
         });

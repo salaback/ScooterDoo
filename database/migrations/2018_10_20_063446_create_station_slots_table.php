@@ -15,8 +15,8 @@ class CreateStationSlotsTable extends Migration
     {
         Schema::create('station_slots', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('station_id')->unsigned();
-            $table->integer('scooter_id')->unsigned();
+            $table->integer('station_cart_id')->unsigned();
+            $table->integer('scooter_id')->unsigned()->nullable();
             $table->string('name');
             $table->string('status')->default('empty');
             $table->timestamps();
