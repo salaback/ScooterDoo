@@ -29,6 +29,11 @@ class ScooterFunctions
             'pickup_time' => $pickup_time
         ];
 
+        // reserve scooter
+        $scooter = Scooter::find($scooter_id);
+        $scooter->status = 'reserved';
+        $scooter->save();
+
         return Reservation::create($reservation);
     }
 
