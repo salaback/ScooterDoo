@@ -58,14 +58,8 @@ class ScooterFunctions
             $trip = Trip::create($trip);
 
             // if there is a reservation, close it
-
             if($reservation_id != null)
-            {
-                $reservation = Reservation::find($reservation_id);
-                $reservation->status = 'collected';
-                $reservation_id->trip_id = $trip->id;
-                $reservation->save();
-            }
+                $this->closeReservation($reservation_id, $trip->id);
 
             // set scooter to checked out
             $scooter->status = 'checked out';
@@ -99,5 +93,13 @@ class ScooterFunctions
         $trip->save();
 
         return 'done';
+    }
+
+    private function closeReservation($reservation_id, $trip_id)
+    {
+        $reservation = Reservation::find($reservation_id);
+        $reservation->status = 'collected';
+        $reservation_id->trip_id = $trip_id;
+        $reservation->save();
     }
 }
