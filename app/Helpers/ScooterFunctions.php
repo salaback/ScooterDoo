@@ -11,6 +11,7 @@ namespace App\Helpers;
 
 use App\Reservation;
 use App\Scooter;
+use App\StationSlot;
 use App\Trip;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -79,5 +80,24 @@ class ScooterFunctions
         // send message to cart to release scooter.
 
         return $trip;
+    }
+
+    public function checkIn(Trip $trip, StationSlot $slot)
+    {
+
+        $scooter = $trip->scooter;
+        $scooter->status = 'evaluating';
+        $scooter->save();
+
+        $slot->scooter_id = $scooter->id;
+        $slot->status = 'evaluating';
+        $slot->save();
+
+        $trip->status = 'complete';
+        $trip->dropoff_station_id = $slot->cart->station->id;
+        $trip->end = Carbon::now();
+        $trip->save();
+
+        return 'done';
     }
 }
