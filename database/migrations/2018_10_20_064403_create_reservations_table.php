@@ -17,6 +17,7 @@ class CreateReservationsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('pickup_station_id')->unsigned();
+            $table->integer('scooter_id')->unsigned();
             $table->integer('trip_id')->unsigned()->nullable();
             $table->string('status');
             $table->dateTime('pickup_time');
