@@ -18,3 +18,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::prefix('/api/scooter')->group(function(){
+   Route:: get('find/{stationId}', 'ScooterController@find');
+   Route:: post('reserve', 'ScooterController@reserve');
+   Route:: get('check-out/{scooterId}', 'ScooterController@checkOut');
+   Route:: get('release/{scooterId}', 'ScooterController@release');
+   Route:: get('check-in/{scooterId}', 'ScooterController@checkIn');
+});
