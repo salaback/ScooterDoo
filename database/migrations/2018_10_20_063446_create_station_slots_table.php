@@ -17,6 +17,7 @@ class CreateStationSlotsTable extends Migration
             $table->increments('id');
             $table->integer('station_id')->unsigned();
             $table->integer('scooter_id')->unsigned();
+            $table->string('name');
             $table->string('status')->default('empty');
             $table->timestamps();
         });
