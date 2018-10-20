@@ -51,8 +51,11 @@ a:hover {
 .main-login-form {
     position: relative;
 }
+
 .login-form-1 .form-control {
-    border: 0;
+    border-color: lightgray;
+    border-width: 2px;
+    border-style: solid;
     box-shadow: 0 0 0;
     border-radius: 0;
     background: transparent;
@@ -104,8 +107,7 @@ a:hover {
 }*/
 
 .login-form-1 .login-button {
-    background-image: url("photoID.png");
-    background-repeat: no-repeat;
+    background: #ffffff;
     position: absolute;
     right: -25px;
     top: 50%;
@@ -119,10 +121,29 @@ a:hover {
     transition: all ease-in-out 500ms;
 }
 
-.login-form-1 .login-button:hover {
+.main-login-form-camera {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+.login-button-camera {
+    width: 100px;
+    height: 100px;
+    border: 0;
+    margin-left: -50px;
+
+}
+.camera_img
+{
+    width: auto;
+    height: auto;
+    max-width: 100%;
+}
+
+/*.login-form-1 .login-button:hover {
     color: #555555;
     transform: rotate(450deg);
-}
+}*/
 .login-form-1 .login-button.clicked {
     color: #555555;
 }
