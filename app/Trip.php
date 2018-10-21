@@ -6,9 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Trip extends Model
 {
-    protected $fillable = ['user_id', 'pickup_station_id', 'dropoff_station_id', 'scooter_id', 'start_time', 'end_time', 'status', 'meta'];
-
-    protected $dateFormat = ['start_at', 'end_at', 'created_at', 'updated_at'];
+    protected $fillable = ['user_id', 'pickup_station_id', 'dropoff_station_id', 'scooter_id', 'start_at', 'end_at', 'status', 'meta'];
 
     /**
      *

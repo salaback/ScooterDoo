@@ -20,7 +20,7 @@ class ScooterFunctions
 {
     public function reserve($pickup_station, $scooter_id, $pickup_time, $user_id = null)
     {
-        $user_id = ($user_id == null) ? Auth::id() :  $user_id;
+        $user_id =  1;
         $reservation = [
             'user_id' => $user_id,
             'status' => 'reserved',
@@ -31,30 +31,22 @@ class ScooterFunctions
 
         // reserve scooter
         $scooter = Scooter::find($scooter_id);
+
         $scooter->status = 'reserved';
         $scooter->save();
 
         return Reservation::create($reservation);
     }
 
-    public function checkOut(Scooter $scooter, $reservation_id = null, $user_id = null)
+    public function release($scooter, $reservation_id = null, $user_id = null)
     {
 
-        // Send signal to cart so display indicator light on the scooter
-
-        return ['scooter' => $scooter, 'reservation_id' => $reservation_id, $user_id => $user_id];
-    }
-
-    public function release(Scooter $scooter, $reservation_id = null, $user_id = null)
-    {
-
-        try {
             // create trip
-            $user_id = ($user_id == null) ? Auth::id() :  $user_id;
+            $user_id = 1;
 
             $trip = [
                 'user_id' => $user_id,
-                'pickup_station_id' => $scooter->station->id,
+                'pickup_station_id' => $scooter->slot->cart->station->id,
                 'scooter_id' => $scooter->id,
                 'start_at' => Carbon::now(),
                 'status' => 'in progress'
@@ -68,13 +60,6 @@ class ScooterFunctions
 
             // set scooter to checked out
             $scooter->status = 'checked out';
-
-            // set listener to make slot available
-        }
-        catch (\Exception $exception)
-        {
-            return $exception;
-        }
 
         // send message to cart to release scooter.
 

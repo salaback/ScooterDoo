@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
             {
                 $cart = \App\StationCart::create([
                         'name' => $cart_name,
-                        'station_id' => $station->id
+                        'station_id' => $station->id,
+                        'eta' => \Carbon\Carbon::yesterday()
                 ]);
 
                 // create 9 slots in the cart
@@ -51,13 +52,13 @@ class DatabaseSeeder extends Seeder
             $slot_id = $emptySlots[$slot_key];
 
             $scooter = \App\Scooter::create([
-                'status' => 'ready'
+                'status' => 'available'
             ]);
 
             $slot = \App\StationSlot::find($slot_id);
 
             $slot->scooter_id = $scooter->id;
-            $slot->status = 'filled';
+            $slot->status = 'available';
 
             $slot->save();
 

@@ -15,15 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-
-Route::prefix('/api/scooter')->group(function(){
-   Route:: get('find/{stationId}', 'ScooterController@find');
-   Route:: post('reserve', 'ScooterController@reserve');
-   Route:: get('check-out/{scooterId}', 'ScooterController@checkOut');
-   Route:: get('release/{scooterId}', 'ScooterController@release');
-   Route:: get('check-in/{scooterId}', 'ScooterController@checkIn');
-});
+Route::post('/checkout', 'PickUpController@checkOutNow')->name('checkout');
+Route::get('/choose-location', 'PickUpController@chooseLocation')->name('choose-location');
+Route::get('/reserve', 'PickUpController@createReservation')->name('reserve');
+Route::get('/trip-in-progress', 'PickUpController@tripInProgress')->name('tripInProgress');
+Route::get('/unlock/{scooter_id}', 'PickUpController@unlock')->name('unlock');
+Route::post('/create-reservation', 'PickUpController@storeReservation')->name('create-reservation');
+Route::get('/station/find-scooter/{station_id}', 'ScooterController@find');
+Route::post('/return', 'PickUpController@return')->name('return');

@@ -19,10 +19,10 @@ class CreateTripsTable extends Migration
             $table->integer('pickup_station_id')->unsigned();
             $table->integer('dropoff_station_id')->unsigned()->nullable();
             $table->integer('scooter_id')->unsigned();
-            $table->dateTime('start_at');
-            $table->dateTime('end_at');
+            $table->dateTime('start_at')->nullable();
+            $table->dateTime('end_at')->nullable();
             $table->string('status');
-            $table->json('meta');
+            $table->json('meta')->nullable();
             $table->timestamps();
         });
     }

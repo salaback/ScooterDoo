@@ -22,6 +22,7 @@ class ScooterObserver
 
             case 'checked out':
                 $slot = $scooter->slot;
+
                 $slot->status = 'available';
                 $slot->save();
                 break;
