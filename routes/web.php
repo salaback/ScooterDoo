@@ -24,3 +24,7 @@ Route::get('/unlock/{scooter_id}', 'PickUpController@unlock')->name('unlock');
 Route::post('/create-reservation', 'PickUpController@storeReservation')->name('create-reservation');
 Route::get('/station/find-scooter/{station_id}', 'ScooterController@find');
 Route::post('/return', 'PickUpController@return')->name('return');
+
+
+Route::get('/admin/resetdb', 'AdminController@resetdb')->name('reset');
+Route::get('/admin/dashboard', 'AdminController@dashboard')->name('dashboard');
