@@ -13,6 +13,6 @@ class StationSlot extends Model
      */
     public function cart()
     {
-        return $this->belongsTo(Station::class);
+        return $this->belongsTo(StationCart::class, 'station_cart_id', 'id');
     }
 }

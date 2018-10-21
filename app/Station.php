@@ -27,15 +27,14 @@ class Station extends Model
         }
 
         // search for carts which will be available
-        $carts =  $this->carts('eta', '>', $eta)->get();
+        $carts =  $this->carts;
 
         // initialize scooters
         $scooters = [];
 
-        // grab all avalible scooter ids
+        // grab all available scooter ids
         foreach($carts as $cart) {
             $ids = $cart->slots->where('status', 'available')->pluck('scooter_id');
-
             $scooters = array_merge($scooters, $ids->toArray());
         }
 

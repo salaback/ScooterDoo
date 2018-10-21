@@ -16,8 +16,11 @@ Route::get('/', function () {
 });
 
 
-Route::get('/checkout', 'PickUpController@checkOutNow')->name('checkout');
+Route::post('/checkout', 'PickUpController@checkOutNow')->name('checkout');
 Route::get('/choose-location', 'PickUpController@chooseLocation')->name('choose-location');
-Route::post('/create-reservation', 'PickUpController@reseration')->name('create-reservation');
-
-
+Route::get('/reserve', 'PickUpController@reserve')->name('reserve');
+Route::get('/trip-in-progress', 'PickUpController@tripInProgress')->name('tripInProgress');
+Route::get('/unlock/{scooter_id}', 'PickUpController@unlock')->name('unlock');
+Route::post('/create-reservation', 'PickUpController@reservation')->name('create-reservation');
+Route::get('/station/find-scooter/{station_id}', 'ScooterController@find');
+Route::post('/return', 'PickUpController@return')->name('return');

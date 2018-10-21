@@ -2,19 +2,54 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ScooterFunctions;
+use App\Scooter;
 use App\Station;
+use App\StationCart;
+use App\Trip;
 use Illuminate\Http\Request;
 
 class PickUpController extends Controller
 {
-    public function checkOutNow()
+    protected $helper;
+
+    public function __construct()
     {
-        $stations = Station::all();
-        return view('pickup.checkout', compact('stations'));
+        $this->helper = new ScooterFunctions();
     }
 
     public function chooseLocation()
     {
+        $stations = Station::all();
+        return view('pickup.choose-location', compact('stations'));
+    }
+
+    public function checkOutNow(Request $request)
+    {
+        $scooter = Scooter::find($request->get('scooter_id'));
+
+        return view('pickup.checkout', compact('scooter'));
+    }
+
+    public function unlock($scooter_id)
+    {
+        $scooter = Scooter::find($scooter_id);
+
+        $trip = $this->helper->release($scooter);
+
+        return redirect(route('tripInProgress', [$trip->id]));
+    }
+
+    public function tripInProgress(Trip $trip)
+    {
+        $stations = Station::all();
+        return view('pickup.tripInProgress', compact('trip', 'stations'));
+    }
+
+    public function return(Request $request)
+    {
+
+        return 'Checked In';
 
     }
 

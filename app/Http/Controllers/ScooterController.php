@@ -13,11 +13,18 @@ class ScooterController extends Controller
      * Return all available scooters at station
      * @param Station $station
      */
-    public function find(Station $station)
+    public function find($station_id)
     {
+        $station = Station::find($station_id);
 
+        $scooter =  $station->availableScooters->first();
 
-        return [];
+        if($scooter != null)
+        {
+            return $scooter->id;
+        }
+        else
+            return null;
 
     }
 

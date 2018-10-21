@@ -41,7 +41,7 @@ class StationModelTest extends TestCase
             if($i < 4)
             {
                 $scooter = Scooter::create([
-                    'status' => 'docked'
+                    'status' => 'available'
                 ]);
 
                 $slot->scooter_id = $scooter->id;
