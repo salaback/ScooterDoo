@@ -69,7 +69,6 @@ class PickUpController extends Controller
 
         $this->helper->reserve($station, $scooter_id, $request->get('pickup_time'));
 
-
         return redirect('/');
     }
 

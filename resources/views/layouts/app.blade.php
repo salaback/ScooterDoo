@@ -43,6 +43,12 @@
             @yield('content')
         </main>
     </div>
+
+    <div style="position: relative; bottom: 10px" >
+        <a href="/admin/resetdb" class="xs-btn btn-primary" >Reset DB</a>
+        <a href="/admin/dashboard" class="xs-btn btn-primary">Dashboard</a>
+    </div>
+
     <script
             src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="

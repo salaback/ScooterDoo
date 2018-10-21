@@ -41,4 +41,28 @@ class Station extends Model
         // return scooters as objects
         return Scooter::findMany($scooters);
     }
+
+    public function getAvailableSlotsAttribute($eta = null)
+    {
+        // add now as eta, if no offered
+        if($eta == null)
+        {
+            $eta = Carbon::now();
+        }
+
+        // search for carts which will be available
+        $carts =  $this->carts;
+
+        // initialize scooters
+        $slots = [];
+
+        // grab all available scooter ids
+        foreach($carts as $cart) {
+            $ids = $cart->slots->where('status', 'empty')->pluck('id');
+            $slots = array_merge($slots, $ids->toArray());
+        }
+
+        // return scooters as objects
+        return StationSlot::findMany($slots);
+    }
 }
