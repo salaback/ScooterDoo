@@ -7,6 +7,7 @@ use App\Scooter;
 use App\Station;
 use App\StationCart;
 use App\Trip;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PickUpController extends Controller
@@ -53,10 +54,23 @@ class PickUpController extends Controller
 
     }
 
+    public function createReservation()
+    {
+        $stations = Station::all();
+        return view('pickup.reserve', compact('stations'));
+    }
 
-    public function createReservation(Request $request)
+    public function storeReservation(Request $request)
     {
 
+        $station = Station::find($request->get('pickup_station_id'));
+
+        $scooter_id = $station->availableScooters->first()->id;
+
+        $this->helper->reserve($station, $scooter_id, $request->get('pickup_time'));
+
+
+        return redirect('/');
     }
 
 }

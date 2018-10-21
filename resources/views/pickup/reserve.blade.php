@@ -4,6 +4,7 @@
 
     <div class="col-xs-offset-1 col-xs-10">
         <form action="{{route('create-reservation')}}" method="post">
+            {{csrf_field()}}
             <div style="height: 100px"></div>
             <label for="pickup_station_id">Pick Up Station</label>
             <select name="pickup_station_id" id="pickup_station_id">
@@ -116,7 +117,7 @@
             <small id="emailHelp" class="form-text text-muted">Your reservation will be held for 15 minutes before it is released.</small>
 
             <div style="height: 50px"></div>
-            <button type="button" class="btn btn-primary btn-lg col-xs-12">Reserve Scooter</button>
+            <input type="submit" value="Reserve Scooter" class="btn btn-primary btn-lg col-xs-12">
         </form>
     </div>
 

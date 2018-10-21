@@ -31,6 +31,7 @@ class ScooterFunctions
 
         // reserve scooter
         $scooter = Scooter::find($scooter_id);
+
         $scooter->status = 'reserved';
         $scooter->save();
 
